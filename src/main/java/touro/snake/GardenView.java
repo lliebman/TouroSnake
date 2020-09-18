@@ -23,7 +23,7 @@ public class GardenView extends JComponent {
     void paintGrass(Graphics g) {
         // Berger
         g.setColor(Color.GREEN);
-        g.fillRect(0, 0, getWidth() /2, getHeight()); //todo: change width() back
+        g.fillRect(0, 0, getWidth(), getHeight());
     }
 
     void paintSnake(Graphics g) {

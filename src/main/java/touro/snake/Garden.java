@@ -71,11 +71,15 @@ public class Garden {
         int x = head.getX();
         int y = head.getY();
 
-        int padding = 2;
+        Direction direction = snake.getSnakeHeadStateMachine().getDirection();
 
-        //if snake is close to border and background should scroll
-        if (x <= padding || x >= Garden.WIDTH - padding || y <= padding || y >= Garden.HEIGHT - padding) {
-            scrollGarden();
+        //if snake is close to border AND facing border, background should scroll
+        //this padding works to put 2 squares of padding on all borders. Something is wrong here.
+        if ((x <= 2 && direction == Direction.West) ||
+                (x >= Garden.WIDTH - 3 && direction == Direction.East) ||
+                (y <= 2 && direction == Direction.North) ||
+                (y >= Garden.HEIGHT - 5 && direction == Direction.South)) {
+            scrollGarden(direction);
             return true;
          }
 
@@ -86,8 +90,7 @@ public class Garden {
     /**
      * Scrolls active cells (i.e. food, rocks, AI snakes) in direction snake is moving.
      */
-    void scrollGarden() {
-        Direction direction = snake.getSnakeHeadStateMachine().getDirection();
+    void scrollGarden(Direction direction) {
 
         //to scroll AI snakes probs just need to call their snake.move()
 
@@ -99,18 +102,18 @@ public class Garden {
         switch (direction) {
             case North -> {
                 food.setX(x);
-                food.setY(y - 1);
+                food.setY(y + 1);
             }
             case East -> {
-                food.setX(x + 1);
+                food.setX(x - 1);
                 food.setY(y);
             }
             case South -> {
                 food.setX(x);
-                food.setY(y + 1);
+                food.setY(y - 1);
             }
             case West -> {
-                food.setX(x - 1);
+                food.setX(x + 1);
                 food.setY(y);
             }
         }

@@ -68,6 +68,7 @@ public class Snake {
         int x = previousHead.getX();
         int y = previousHead.getY();
 
+
         //move head one square in proper direction (assumes origin is on the top left corner)
         Square newSquare;
         switch (direction) {

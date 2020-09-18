@@ -66,7 +66,7 @@ public class Garden {
     /**
      * If snake reaches borders of garden, scroll background for an "infinite" garden.
      */
-    boolean scrollGardenIfNecessary() {
+    private boolean scrollGardenIfNecessary() {
         Square head = snake.getHead();
         int x = head.getX();
         int y = head.getY();
@@ -74,11 +74,12 @@ public class Garden {
         Direction direction = snake.getSnakeHeadStateMachine().getDirection();
 
         //if snake is close to border AND facing border, background should scroll
-        //this padding works to put 2 squares of padding on all borders. Something is wrong here.
+        //this padding works to put 2 squares of padding on all borders. These numbers feel weird though.
         if ((x <= 2 && direction == Direction.West) ||
                 (x >= Garden.WIDTH - 3 && direction == Direction.East) ||
                 (y <= 2 && direction == Direction.North) ||
                 (y >= Garden.HEIGHT - 5 && direction == Direction.South)) {
+
             scrollGarden(direction);
             return true;
          }
@@ -87,36 +88,73 @@ public class Garden {
     }
 
 
-    /**
-     * Scrolls active cells (i.e. food, rocks, AI snakes) in direction snake is moving.
-     */
-    void scrollGarden(Direction direction) {
+    private void scrollGarden(Direction direction) {
+        scrollAISnakes(direction);
+        scrollRocks(direction);
+        scrollFood(direction);
+    }
 
-        //to scroll AI snakes probs just need to call their snake.move()
+    private void scrollAISnakes(Direction direction) {
+        //not implemented yet
+/*
+        for (Snake snake : garden.getAISnakes()) {
+            for(Square s : snake.getSquares()) {
+                int[] newSquare = getNewSquare(direction, s.getX() , s.getY());
+                s.setX(newSquare[0]);
+                s.setY(newSquare[1]);
+            }
+        }*/
+    }
 
-        //to scroll food/rocks
+    private void scrollRocks(Direction direction) {
+        //not implemented yet
 
+/*
+        for (Rock rock : garden.getRocks()){
+            int x = rock.getX();
+            int y = rock.getY();
+
+            int[] newSquare = getNewSquare(direction, x , y);
+            rock.setX(newSquare[0]);
+            rock.setY(newSquare[1]);
+        }*/
+    }
+
+    private void scrollFood(Direction direction) {
         int x = food.getX();
         int y = food.getY();
 
+        int[] newSquare = getNewSquare(direction, x , y);
+        food.setX(newSquare[0]);
+        food.setY(newSquare[1]);
+    }
+
+    /**
+     * Scrolls individual active square (i.e. food, rocks, AI snakes) in direction snake is moving.
+     */
+    private int[] getNewSquare(Direction direction, int x, int y) {
+        int[] newSquare = new int[] {0, 0};
+
         switch (direction) {
             case North -> {
-                food.setX(x);
-                food.setY(y + 1);
+                newSquare[0] = x;
+                newSquare[1] = y + 1;
             }
             case East -> {
-                food.setX(x - 1);
-                food.setY(y);
+                newSquare[0] = x - 1;
+                newSquare[1] = y;
             }
             case South -> {
-                food.setX(x);
-                food.setY(y - 1);
+                newSquare[0] = x;
+                newSquare[1] = y - 1;
             }
             case West -> {
-                food.setX(x + 1);
-                food.setY(y);
+                newSquare[0] = x + 1;
+                newSquare[1] = y;
             }
         }
+
+        return newSquare;
     }
 
     /**

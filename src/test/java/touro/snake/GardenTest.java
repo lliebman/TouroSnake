@@ -17,7 +17,7 @@ public class GardenTest {
         FoodFactory foodFactory = mock(FoodFactory.class);
         Garden garden = new Garden(snake, foodFactory);
 
-        doReturn(true).when(snake).inBounds();
+       // doReturn(true).when(snake).inBounds();
         doReturn(false).when(snake).eatsSelf();
         Square square = mock(Square.class);
         doReturn(square).when(snake).getHead();
@@ -42,5 +42,10 @@ public class GardenTest {
         //then
         verify(foodFactory).newInstance();
         assertNotNull(garden.getFood());
+    }
+
+    @Test
+    public void scrollGardenIfNecessary() {
+
     }
 }

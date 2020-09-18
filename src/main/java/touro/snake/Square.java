@@ -6,21 +6,23 @@ import java.util.Objects;
  * Super class of all objects in the Garden.
  */
 public class Square {
-    private final int x;
-    private final int y;
+    private int x;
+    private int y;
 
     public Square(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getX() {
-        return x;
-    }
+    public int getX() { return x; }
 
-    public int getY() {
-        return y;
-    }
+    public int getY() { return y; }
+
+    public void setX(int newX) { x = newX; }
+
+    public void setY(int newY) { y = newY; }
+
+
 
     @Override
     public boolean equals(Object o) {

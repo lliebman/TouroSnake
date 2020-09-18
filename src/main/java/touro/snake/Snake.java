@@ -53,6 +53,8 @@ public class Snake {
         return squares.get(0);
     }
 
+    public SnakeHeadStateMachine getSnakeHeadStateMachine() {return snakeHeadStateMachine;}
+
     /**
      * Moves the Snake forward in whatever direction the head is facing.
      */
@@ -106,13 +108,13 @@ public class Snake {
     /**
      * @return true if the Snake is within the bounds of the Garden, otherwise false.
      */
-    public boolean inBounds() {
+/*    public boolean inBounds() {
         Square head = getHead();
         int x = head.getX();
         int y = head.getY();
 
-        return x > 0 && x < Garden.WIDTH && y > 0 && y < Garden.HEIGHT;
-    }
+        return x > 1 && x < Garden.WIDTH && y > 0 && y < Garden.HEIGHT;
+    }*/
 
     /**
      * @return true if the head of the Snake has intersected with itself, otherwise false.

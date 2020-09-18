@@ -32,7 +32,8 @@ public class Garden {
      * @return true if the snake is still alive, otherwise false.
      */
     public boolean advance() {
-        if (moveSnake()) {
+
+        if (scrollGardenIfNecessary() || moveSnake()) {
             createFoodIfNecessary();
             return true;
         }
@@ -47,8 +48,8 @@ public class Garden {
     boolean moveSnake() {
         snake.move();
 
-        //if collides with wall or self
-        if (!snake.inBounds() || snake.eatsSelf()) {
+        //if collides with self
+        if (snake.eatsSelf()) {
             return false;
         }
 
@@ -60,6 +61,59 @@ public class Garden {
             food = null;
         }
         return true;
+    }
+
+    /**
+     * If snake reaches borders of garden, scroll background for an "infinite" garden.
+     */
+    boolean scrollGardenIfNecessary() {
+        Square head = snake.getHead();
+        int x = head.getX();
+        int y = head.getY();
+
+        int padding = 2;
+
+        //if snake is close to border and background should scroll
+        if (x <= padding || x >= Garden.WIDTH - padding || y <= padding || y >= Garden.HEIGHT - padding) {
+            scrollGarden();
+            return true;
+         }
+
+        return false;
+    }
+
+
+    /**
+     * Scrolls active cells (i.e. food, rocks, AI snakes) in direction snake is moving.
+     */
+    void scrollGarden() {
+        Direction direction = snake.getSnakeHeadStateMachine().getDirection();
+
+        //to scroll AI snakes probs just need to call their snake.move()
+
+        //to scroll food/rocks
+
+        int x = food.getX();
+        int y = food.getY();
+
+        switch (direction) {
+            case North -> {
+                food.setX(x);
+                food.setY(y - 1);
+            }
+            case East -> {
+                food.setX(x + 1);
+                food.setY(y);
+            }
+            case South -> {
+                food.setX(x);
+                food.setY(y + 1);
+            }
+            case West -> {
+                food.setX(x - 1);
+                food.setY(y);
+            }
+        }
     }
 
     /**

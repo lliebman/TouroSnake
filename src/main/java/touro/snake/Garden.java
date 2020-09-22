@@ -66,7 +66,7 @@ public class Garden {
     /**
      * If snake reaches borders of garden, scroll background for an "infinite" garden.
      */
-    private boolean scrollGardenIfNecessary() {
+    boolean scrollGardenIfNecessary() {
         Square head = snake.getHead();
         int x = head.getX();
         int y = head.getY();

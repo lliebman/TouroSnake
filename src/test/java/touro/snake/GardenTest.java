@@ -44,8 +44,32 @@ public class GardenTest {
         assertNotNull(garden.getFood());
     }
 
+    //does not work yet
     @Test
     public void scrollGardenIfNecessary() {
+        //given
+        Snake snake = mock(Snake.class);
+        FoodFactory foodFactory = mock(FoodFactory.class);
+        SnakeHeadStateMachine snakeHeadStateMachine = mock(SnakeHeadStateMachine.class);
+        Garden garden = new Garden(snake, foodFactory);
+
+        doReturn(false).when(snake).eatsSelf();
+        doReturn(snakeHeadStateMachine).when(snake).getSnakeHeadStateMachine();
+        doReturn(Direction.North).when(snakeHeadStateMachine).getDirection();
+       // doReturn(Direction.North).when(snake).getSnakeHeadStateMachine().getDirection();
+        Square square = mock(Square.class);
+        doReturn(square).when(snake).getHead();
+        doReturn(2).when(square).getY();
+        doReturn(2).when(square).getX();
+
+        //when
+        garden.advance();
+
+
+        //then
+        assertTrue(garden.scrollGardenIfNecessary());
+        verify(garden).scrollGardenIfNecessary();
+
 
     }
 }

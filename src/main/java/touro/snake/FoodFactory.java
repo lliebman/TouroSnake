@@ -13,6 +13,7 @@ public class FoodFactory {
 
     private final Random rand = new Random();
 
+    //todo: generated food needs to generate within the now changing x,y of viewBox
     public Food newInstance() {
         int randX = rand.nextInt(Garden.WIDTH);
         int randY = rand.nextInt(Garden.HEIGHT);

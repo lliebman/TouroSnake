@@ -22,7 +22,6 @@ public class AStarStrategy implements SnakeStrategy {
         }
 
         Node endNode = new Node(food);
-
         ArrayList<Node> openNodes = new ArrayList<>();
         HashSet<Node> closedNodes = new HashSet<>();
 

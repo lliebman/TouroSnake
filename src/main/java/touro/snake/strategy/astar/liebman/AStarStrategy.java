@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
- * Made together by Lillian Liebman and Michal Berger
+ * Made mostly together by Lillian Liebman and Michal Berger
  */
 public class AStarStrategy implements SnakeStrategy {
     Direction[] directions = Direction.values();

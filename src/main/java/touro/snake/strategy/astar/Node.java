@@ -7,9 +7,9 @@ import touro.snake.Square;
  * https://www.youtube.com/watch?v=-L-WgKMFuhE
  */
 public class Node extends Square {
-    public double fromStart;
     private Node parent;
     private double fromEnd;
+    protected double fromStart;
 
     public Node(Square square) {
         super(square);

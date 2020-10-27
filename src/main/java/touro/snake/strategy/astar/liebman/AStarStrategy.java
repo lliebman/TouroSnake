@@ -45,8 +45,7 @@ public class AStarStrategy implements SnakeStrategy {
                         closedNodes.contains(neighbor)) {
                     continue;
                 }
-                double newCostToNeighbour = currentNode.fromStart + currentNode.distance(neighbor);
-                 if (newCostToNeighbour < currentNode.fromStart || !openNodes.contains(neighbor)) {
+                if (!openNodes.contains(neighbor)) {
                     openNodes.add(neighbor);
                 }
             }
@@ -58,23 +57,7 @@ public class AStarStrategy implements SnakeStrategy {
         while (currentNode.getParent() != startNode) {
             currentNode = currentNode.getParent();
         }
-        return getDirection(startNode, currentNode);
-    }
-
-    private Direction getDirection(Node startNode, Node endNode) {
-        if (startNode.getX() + 1 == endNode.getX()) {
-            return Direction.East;
-        }
-        else if (startNode.getX() - 1 == endNode.getX()) {
-            return Direction.West;
-        }
-        else if (startNode.getY() - 1 == endNode.getY()) {
-            return Direction.North;
-        }
-        else if (startNode.getY() + 1 == endNode.getY()) {
-            return Direction.South;
-        }
-        return null;
+        return startNode.directionTo(currentNode);
     }
 
     private Node getLowestNode(ArrayList<Node> openNodes) {

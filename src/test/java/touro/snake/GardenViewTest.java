@@ -2,7 +2,6 @@ package touro.snake;
 
 import org.junit.Test;
 import org.mockito.Mockito;
-import touro.snake.strategy.astar.liebman.AStarStrategy;
 
 import java.awt.*;
 
@@ -20,7 +19,6 @@ public class GardenViewTest {
     public void paintGrass() {
         //given
         Garden garden = mock(Garden.class);
-        AStarStrategy strategy = mock(AStarStrategy.class);
         GardenView view = new GardenView(garden);
         int width = view.getWidth();
         int height = view.getHeight();
@@ -39,7 +37,6 @@ public class GardenViewTest {
         //given
         Snake snake = mock(Snake.class);
         Garden garden = mock(Garden.class);
-        AStarStrategy strategy = mock(AStarStrategy.class);
         GardenView view = new GardenView(garden);
         Graphics g = mock(Graphics.class);
 
@@ -66,7 +63,6 @@ public class GardenViewTest {
     public void paintFood() {
         //given
         Garden garden = mock(Garden.class);
-        AStarStrategy strategy = mock(AStarStrategy.class);
         GardenView view = new GardenView(garden);
 
         when(garden.getFood()).thenReturn(mock(Food.class));
@@ -90,7 +86,6 @@ public class GardenViewTest {
     public void paintFood_nullFood() {
         //given
         Garden garden = mock(Garden.class);
-        AStarStrategy strategy = mock(AStarStrategy.class);
         GardenView view = new GardenView(garden);
         Graphics g = mock(Graphics.class);
 

@@ -15,8 +15,7 @@ public class SnakeMain {
         // Set up all class dependencies here.
 
         SnakeHeadStateMachine snakeHeadStateMachine = new SnakeHeadStateMachine(Direction.West);
-        AStarStrategy strategy = new AStarStrategy();
-        Snake snake = new Snake(snakeHeadStateMachine, strategy);
+        Snake snake = new Snake(snakeHeadStateMachine, new BlankStrategy());
         FoodFactory foodFactory = new FoodFactory();
         try {
             InputStream inputStream = Garden.class.getClassLoader().getResourceAsStream("EatNoise.wav");

@@ -1,20 +1,16 @@
 package touro.snake;
 
-import touro.snake.strategy.astar.Node;
-import touro.snake.strategy.astar.liebman.AStarStrategy;
-
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class GardenView extends JComponent {
 
     private final Garden garden;
-    private final AStarStrategy strategy;
     public static final int CELL_SIZE = 10;
 
-    public GardenView(Garden garden, AStarStrategy strategy) {
+    public GardenView(Garden garden) {
         this.garden = garden;
-        this.strategy = strategy;
     }
 
     @Override
@@ -35,40 +31,41 @@ public class GardenView extends JComponent {
 
     void paintSnake(Graphics g) {
         g.setColor(Color.RED);
-        for (Square s : garden.getSnake().getSquares()) {
-            g.fillRect(s.getX()*CELL_SIZE, s.getY()*CELL_SIZE, CELL_SIZE, CELL_SIZE);
-        }
+        paintListOfSquares(garden.getSnake().getSquares(), g);
     }
 
     void paintFood(Graphics g) {
         if (garden.getFood() != null) {
             Food food = garden.getFood();
             g.setColor(Color.LIGHT_GRAY);
-
-            int x = food.getX() * CELL_SIZE;
-            int y = food.getY() * CELL_SIZE;
-            g.fillRect(x, y, CELL_SIZE, CELL_SIZE);
+            paintSquare(food, g);
         }
     }
 
     void paintSnakePath(Graphics g) {
         g.setColor(Color.BLUE);
-        for (Square s : strategy.getPath()) {
-            g.fillRect(s.getX()*CELL_SIZE, s.getY()*CELL_SIZE, CELL_SIZE, CELL_SIZE);
-        }
+        paintListOfSquares(garden.getSnake().getStrategy().getPath(), g);
     }
 
     void paintOpenNodes(Graphics g) {
         g.setColor(Color.CYAN);
-        for (Square s : strategy.getOpenSearchSpace()) {
-            g.fillRect(s.getX()*CELL_SIZE, s.getY()*CELL_SIZE, CELL_SIZE, CELL_SIZE);
-        }
+        paintListOfSquares(garden.getSnake().getStrategy().getOpenSearchSpace(), g);
     }
 
     void paintClosedNodes(Graphics g) {
         g.setColor(Color.orange);
-        for (Square s : strategy.getClosedSearchSpace()) {
-            g.fillRect(s.getX()*CELL_SIZE, s.getY()*CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        paintListOfSquares(garden.getSnake().getStrategy().getClosedSearchSpace(), g);
+    }
+
+    private void paintListOfSquares(List<Square> squareList, Graphics g) {
+        for (Square square : squareList) {
+            paintSquare(square, g);
         }
+    }
+
+    private void paintSquare(Square square, Graphics g) {
+        int x = square.getX() * CELL_SIZE;
+        int y = square.getY() * CELL_SIZE;
+        g.fillRect(x, y, CELL_SIZE, CELL_SIZE);
     }
 }

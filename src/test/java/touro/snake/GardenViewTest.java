@@ -21,7 +21,7 @@ public class GardenViewTest {
         //given
         Garden garden = mock(Garden.class);
         AStarStrategy strategy = mock(AStarStrategy.class);
-        GardenView view = new GardenView(garden, strategy);
+        GardenView view = new GardenView(garden);
         int width = view.getWidth();
         int height = view.getHeight();
 
@@ -40,7 +40,7 @@ public class GardenViewTest {
         Snake snake = mock(Snake.class);
         Garden garden = mock(Garden.class);
         AStarStrategy strategy = mock(AStarStrategy.class);
-        GardenView view = new GardenView(garden, strategy);
+        GardenView view = new GardenView(garden);
         Graphics g = mock(Graphics.class);
 
         List<Square> squares = List.of(
@@ -67,7 +67,7 @@ public class GardenViewTest {
         //given
         Garden garden = mock(Garden.class);
         AStarStrategy strategy = mock(AStarStrategy.class);
-        GardenView view = new GardenView(garden, strategy);
+        GardenView view = new GardenView(garden);
 
         when(garden.getFood()).thenReturn(mock(Food.class));
 
@@ -91,7 +91,7 @@ public class GardenViewTest {
         //given
         Garden garden = mock(Garden.class);
         AStarStrategy strategy = mock(AStarStrategy.class);
-        GardenView view = new GardenView(garden, strategy);
+        GardenView view = new GardenView(garden);
         Graphics g = mock(Graphics.class);
 
         //when
